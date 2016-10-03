@@ -1,23 +1,53 @@
-//your code here
+NormalParticle [] lightWave; 
 void setup()
 {
-	//your code here
+	size(600,600);
+	lightWave = new NormalParticle[200];
+	for (int i = 0; i < lightWave.length; i++)
+	{
+		lightWave[i] = new NormalParticle();
+	}
 }
 void draw()
 {
-	//your code here
+	for (int i = 0; i < lightWave.length; i++)
+	{
+		lightWave[i].move();
+		lightWave[i].show();
+	}
 }
 class NormalParticle
 {
-	//your code here
+	double myX, myY, dSpeed, myColor;
+	int dTheta;
+	NormalParticle()
+	{
+		myX = 300;
+		myY = 300;
+		myColor = (int)(Math.random()*256);
+		dSpeed = Math.random()*25;
+		dTheta = (int)(Math.PI*2*Math.random());
+	} 
+	void move()
+	{
+		myX = myX + Math.cos(3.6)*dSpeed;
+		myY = myY + Math.sin(1.5)*dSpeed;
+	}
+	void show()
+	{
+		noStroke();
+		fill((float)myColor,(float)myColor,(float)myColor);
+		ellipse((float)myX,(float)myY,20,20);
+	}
 }
 interface Particle
 {
-	//your code here
+	//public void move();
+	//public void show();
 }
 class OddballParticle //uses an interface
 {
-	//your code here
+	
 }
 class JumboParticle //uses inheritance
 {
