@@ -1,12 +1,13 @@
-NormalParticle [] lightWave; 
+Particle [] lightWave; 
 void setup()
 {
 	size(600,600);
-	lightWave = new NormalParticle[200];
+	lightWave = new Particle[400];
 	for (int i = 0; i < lightWave.length; i++)
 	{
 		lightWave[i] = new NormalParticle();
 	}
+	lightWave[0] = new OddballParticle();
 }
 void draw()
 {
@@ -16,7 +17,7 @@ void draw()
 		lightWave[i].show();
 	}
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
 	double myX, myY, dSpeed, myColor;
 	int dTheta;
@@ -25,29 +26,48 @@ class NormalParticle
 		myX = 300;
 		myY = 300;
 		myColor = (int)(Math.random()*256);
-		dSpeed = Math.random()*25;
+		dSpeed = 10;
 		dTheta = (int)(Math.PI*2*Math.random());
 	} 
-	void move()
+	public void move()
 	{
-		myX = myX + Math.cos(3.6)*dSpeed;
-		myY = myY + Math.sin(1.5)*dSpeed;
+		myX = myX + Math.cos(dTheta)*dSpeed;
+		myY = myY + Math.sin(dTheta)*dSpeed;
 	}
-	void show()
+	public void show()
 	{
 		noStroke();
-		fill((float)myColor,(float)myColor,(float)myColor);
+		fill((float)(Math.random()*125),(float)(Math.random()*150),(float)(Math.random()*175));
 		ellipse((float)myX,(float)myY,20,20);
 	}
 }
 interface Particle
 {
-	//public void move();
-	//public void show();
+	public void move();
+	public void show();
 }
-class OddballParticle //uses an interface
+class OddballParticle implements Particle //uses an interface
 {
-	
+	  double myX, myY, dSpeed;
+	  int dTheta; 
+	  OddballParticle()
+	  {
+	  	myX = 300;
+	  	myY = 300;
+	  	dSpeed = (Math.random()*20)+5;
+	  	dTheta = (int)(Math.PI*2*Math.random());
+	  }
+	  public void move()
+	  {
+	  	myX = myX + Math.cos(dTheta)*dSpeed;
+	  	myY = myY + Math.sin(dTheta)*dSpeed;
+	  }
+	  public void show()
+	  {
+	  	noStroke();
+	  	fill((float)(Math.random()*125),(float)(Math.random()*150),(float)(Math.random()*175));
+	  	ellipse((float)myX,(float)myY,20,20);
+	  }
 }
 class JumboParticle //uses inheritance
 {
