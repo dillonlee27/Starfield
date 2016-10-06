@@ -8,7 +8,7 @@ void setup()
 		lightWave[i] = new NormalParticle();
 	}
 	lightWave[0] = new OddballParticle();
-	lightWave[0] = new JumboParticle();
+	lightWave[1] = new JumboParticle();	
 }
 void draw()
 {
@@ -27,15 +27,15 @@ class NormalParticle implements Particle
 	{
 		myX = 300;
 		myY = 300;
-		myColor = (int)(Math.random()*256);
-		dSpeed = (int)dSpeed + 2;
+		myColor = (int)(Math.random()*255);
+		dSpeed = 0;
 		dTheta = (int)(Math.PI*2*Math.random());
 	} 
 	public void move()
 	{
 		myX = 300 + 150*Math.cos(dSpeed);
 		myY = 300 + 150*Math.sin(dSpeed);
-		dSpeed = dSpeed + 10;
+		dSpeed = dSpeed + 0.5;
 	}
 	public void show()
 	{
@@ -61,9 +61,9 @@ class OddballParticle implements Particle //uses an interface
 	  }
 	  public void move()
 	  {
-	  	myX = myX + Math.cos(dTheta)*dSpeed;
-	  	myY = myY + Math.sin(dTheta)*dSpeed;
-	  	dSpeed = dSpeed + (int)(Math.random()*255);
+	  	myX = 300 + 125*Math.sin(dSpeed);
+	  	myY = 300 + 175*Math.cos(dSpeed);
+	  	dSpeed = dSpeed + 15;
 	  }
 	  public void show()
 	  {
@@ -74,8 +74,8 @@ class OddballParticle implements Particle //uses an interface
 }
 class JumboParticle implements Particle
 {
-	double dTheta;
-	int myX, myY, dSpeed;
+	double dTheta, myX, myY;
+	int  dSpeed;
 	JumboParticle()
 	{
 		myX = 300;
@@ -85,15 +85,15 @@ class JumboParticle implements Particle
 	}
 	public void move()
 	{
-		myX = (float)300 + 150*Math.cos(dSpeed);
-		myY = (float)300 + 150*Math.sin(dSpeed);
+		myX = 300 + 100*Math.cos(dSpeed);
+		myY = 300 + 150*Math.sin(dSpeed);
 		dSpeed = dSpeed + 25;
 	}
 	public void show()
 	{
 		noStroke();
 		fill((float)(Math.random()*256),(float)(Math.random()*256),(float)(Math.random()*256));
-		ellipse(myX,myY,25,25);
+		ellipse((float)myX,(float)myY,25,25);
 	}
 }
 
